@@ -1,4 +1,4 @@
-package pl.kacperszo.trafficcontrol.model;
+package pl.kacperszot.trafficcontrol.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;

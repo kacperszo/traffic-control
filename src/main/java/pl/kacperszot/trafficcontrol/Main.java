@@ -1,11 +1,11 @@
-package pl.kacperszo.trafficcontrol;
+package pl.kacperszot.trafficcontrol;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import pl.kacperszo.trafficcontrol.model.AddVehicleCommand;
-import pl.kacperszo.trafficcontrol.model.Command;
-import pl.kacperszo.trafficcontrol.model.CommandsWrapper;
-import pl.kacperszo.trafficcontrol.model.StepCommand;
+import pl.kacperszot.trafficcontrol.model.command.AddVehicleCommand;
+import pl.kacperszot.trafficcontrol.model.command.Command;
+import pl.kacperszot.trafficcontrol.model.command.CommandsWrapper;
+import pl.kacperszot.trafficcontrol.model.command.StepCommand;
 
 public class Main {
     public static void main(String[] args) throws JsonProcessingException {

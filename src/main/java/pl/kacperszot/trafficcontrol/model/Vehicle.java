@@ -1,4 +1,4 @@
-package pl.kacperszo.trafficcontrol.model;
+package pl.kacperszot.trafficcontrol.model;
 
 /**
  * Class representing single vehicle in the simulation

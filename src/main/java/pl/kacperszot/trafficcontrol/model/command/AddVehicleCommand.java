@@ -1,6 +1,8 @@
-package pl.kacperszo.trafficcontrol.model;
+package pl.kacperszot.trafficcontrol.model.command;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import pl.kacperszot.trafficcontrol.model.Road;
+import pl.kacperszot.trafficcontrol.model.Vehicle;
 
 import java.util.Objects;
 

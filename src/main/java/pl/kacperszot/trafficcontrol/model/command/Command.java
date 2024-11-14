@@ -1,4 +1,4 @@
-package pl.kacperszo.trafficcontrol.model;
+package pl.kacperszot.trafficcontrol.model.command;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

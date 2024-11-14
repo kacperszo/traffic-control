@@ -1,4 +1,4 @@
-package pl.kacperszo.trafficcontrol.model;
+package pl.kacperszot.trafficcontrol.model;
 
 /**
  *
