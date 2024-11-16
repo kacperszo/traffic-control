@@ -1,4 +1,4 @@
-package pl.kacperszot.trafficcontrol.model;
+package pl.kacperszot.trafficcontrol.model.road;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 /**
  * Enum representing the directions of roads at an intersection.
  */
-public enum Road {
+public enum RoadDirection {
     NORTH("north"),
     EAST("east"),
     SOUTH("south"),
@@ -14,7 +14,7 @@ public enum Road {
 
     private final String direction;
 
-    Road(String direction) {
+    RoadDirection(String direction) {
         this.direction = direction;
     }
     @JsonValue
@@ -23,8 +23,8 @@ public enum Road {
     }
 
     @JsonCreator
-    public static Road fromJson(String value) {
-        for (Road roadDirection : Road.values()) {
+    public static RoadDirection fromJson(String value) {
+        for (RoadDirection roadDirection : RoadDirection.values()) {
             if (roadDirection.direction.equals(value)) {
                 return roadDirection;
             }

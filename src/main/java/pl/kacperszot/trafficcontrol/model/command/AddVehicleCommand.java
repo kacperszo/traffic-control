@@ -1,7 +1,7 @@
 package pl.kacperszot.trafficcontrol.model.command;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import pl.kacperszot.trafficcontrol.model.Road;
+import pl.kacperszot.trafficcontrol.model.road.RoadDirection;
 import pl.kacperszot.trafficcontrol.model.Vehicle;
 
 import java.util.Objects;
@@ -9,7 +9,7 @@ import java.util.Objects;
 public class AddVehicleCommand implements Command {
     private final Vehicle vehicle;
 
-    public AddVehicleCommand(@JsonProperty("vehicleId") String vehicleId, @JsonProperty("startRoad") Road startRoad, @JsonProperty("endRoad") Road endRoad) {
+    public AddVehicleCommand(@JsonProperty("vehicleId") String vehicleId, @JsonProperty("startRoad") RoadDirection startRoad, @JsonProperty("endRoad") RoadDirection endRoad) {
         vehicle = new Vehicle(vehicleId, startRoad, endRoad);
     }
 
