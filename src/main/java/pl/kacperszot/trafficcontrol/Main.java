@@ -6,6 +6,9 @@ import pl.kacperszot.trafficcontrol.model.command.AddVehicleCommand;
 import pl.kacperszot.trafficcontrol.model.command.Command;
 import pl.kacperszot.trafficcontrol.model.command.CommandsWrapper;
 import pl.kacperszot.trafficcontrol.model.command.StepCommand;
+import pl.kacperszot.trafficcontrol.model.intersection.CrossroadIntersection;
+import pl.kacperszot.trafficcontrol.simulation.SimulationManager;
+import pl.kacperszot.trafficcontrol.simulation.strategy.EveryTickStateTurnTrafficLightStrategy;
 
 public class Main {
     public static void main(String[] args) throws JsonProcessingException {
@@ -92,12 +95,14 @@ public class Main {
                 """;
         ObjectMapper mapper = new ObjectMapper();
         CommandsWrapper wrapper = mapper.readValue(inputJSON, CommandsWrapper.class);
+        SimulationManager simulationManager = new SimulationManager(new CrossroadIntersection(), new EveryTickStateTurnTrafficLightStrategy());
 
         for (Command command : wrapper.commands()) {
             if (command instanceof StepCommand stepCommand) {
-                System.out.println("StepCommand");
+                var step = simulationManager.step();
+                System.out.println(step);
             } else if (command instanceof AddVehicleCommand addVehicleCommand) {
-                System.out.println("AddVehicleCommand: " + addVehicleCommand);
+                simulationManager.addVehicle(addVehicleCommand.getVehicle());
             }
         }
     }

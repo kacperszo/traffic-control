@@ -19,6 +19,10 @@ public class RoadLane {
         return vehicles.poll();
     }
 
+    public Vehicle peekNextVehicle() {
+        return vehicles.peek();
+    }
+
     public LaneMode getLaneMode() {
         return laneMode;
     }
@@ -46,5 +50,16 @@ public class RoadLane {
                 "laneMode=" + laneMode +
                 ", vehicles=" + vehicles +
                 '}';
+    }
+
+    public void clear() {
+        this.vehicles.clear();
+    }
+
+    public void removeNextVehicle() {
+        this.vehicles.remove();
+    }
+    public void removeVehicle(Vehicle vehicle) {
+        this.vehicles.remove(vehicle);
     }
 }
