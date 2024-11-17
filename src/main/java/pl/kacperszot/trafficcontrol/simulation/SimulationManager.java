@@ -42,10 +42,7 @@ public class SimulationManager {
         SimulationStep step = vehicleManager.step(trafficState);
 
         //remove leaving vehicles from lanes
-        //Since leaving vehicle is always first vehicle on entry lane this remove will not take O(n) but O(1),
-        //since loop will end always after first element
-        //at least for queue implementation of the road line
-        step.leftVehicles().forEach(intersection::removeVehicle);
+        step.getLeftVehicles().forEach(intersection::removeVehicle);
         //tick traffic lights
         trafficLightStrategy.step(intersection);
 

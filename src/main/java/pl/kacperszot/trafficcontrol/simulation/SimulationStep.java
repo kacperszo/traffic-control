@@ -5,11 +5,17 @@ import pl.kacperszot.trafficcontrol.model.Vehicle;
 
 import java.util.List;
 
-public record SimulationStep(List<Vehicle> leftVehicles) {
+public class SimulationStep {
 
+    private List<Vehicle> leftVehicles;
 
-    @JsonValue
-    public List<String> getJsonValue() {
-        return leftVehicles.stream().map(Vehicle::getId).toList();
+    public SimulationStep(List<Vehicle> leftVehicles) {
+        this.leftVehicles = leftVehicles;
     }
+
+
+    public List<Vehicle> getLeftVehicles() {
+        return leftVehicles;
+    }
+
 }

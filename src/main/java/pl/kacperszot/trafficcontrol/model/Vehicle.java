@@ -1,5 +1,6 @@
 package pl.kacperszot.trafficcontrol.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import pl.kacperszot.trafficcontrol.model.road.RoadDirection;
 
 import java.util.Objects;
@@ -17,7 +18,7 @@ public class Vehicle {
         this.route = new Route(startDirection, endDirection);
         this.status = VehicleStatus.WAITING_TO_ENTER;
     }
-
+    @JsonValue
     public String getId() {
         return id;
     }
