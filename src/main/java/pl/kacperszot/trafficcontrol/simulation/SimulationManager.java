@@ -11,10 +11,10 @@ public class SimulationManager {
     private final TrafficLightStrategy trafficLightStrategy;
     private final VehicleManager vehicleManager;
 
-    public SimulationManager(Intersection intersection, TrafficLightStrategy trafficLightStrategy) {
+    public SimulationManager(Intersection intersection, TrafficLightStrategy trafficLightStrategy, VehicleManager vehicleManager) {
         this.intersection = intersection;
         this.trafficLightStrategy = trafficLightStrategy;
-        vehicleManager = new VehicleManager();
+        this.vehicleManager = vehicleManager;
     }
 
 
