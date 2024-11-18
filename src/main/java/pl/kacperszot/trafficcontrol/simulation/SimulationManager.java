@@ -4,13 +4,10 @@ import pl.kacperszot.trafficcontrol.model.TrafficState;
 import pl.kacperszot.trafficcontrol.model.Vehicle;
 import pl.kacperszot.trafficcontrol.model.VehicleStatus;
 import pl.kacperszot.trafficcontrol.model.intersection.Intersection;
-import pl.kacperszot.trafficcontrol.model.road.RoadLane;
 import pl.kacperszot.trafficcontrol.simulation.strategy.TrafficLightStrategy;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-
-import java.util.List;
 
 public class SimulationManager {
     private final Intersection intersection;
@@ -57,7 +54,7 @@ public class SimulationManager {
         SimulationStep step = vehicleManager.step(trafficState);
 
         //remove leaving vehicles from lanes
-        step.getLeftVehicles().forEach(intersection::removeVehicle);
+        step.leftVehicles().forEach(intersection::removeVehicle);
         //tick traffic lights
         trafficLightStrategy.step(intersection);
 

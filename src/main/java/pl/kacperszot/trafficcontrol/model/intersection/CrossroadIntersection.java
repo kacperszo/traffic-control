@@ -46,10 +46,6 @@ public class CrossroadIntersection implements Intersection {
         getRoadByDirection(vehicle.getRoute().getStart()).getEntryLine().addVehicle(vehicle);
     }
 
-    public void removeWaitingVehiclesFromWaitingLines() {
-
-    }
-
     @Override
     public void removeVehicle(Vehicle vehicle) {
         getRoadByDirection(vehicle.getRoute().getStart()).getEntryLine().removeNextVehicle();
