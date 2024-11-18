@@ -39,26 +39,26 @@ public class VehicleManager {
                 .flatMap(key -> state.getWaitingVehicles().get(key).stream())
                 .forEach(vehicle -> {
                     vehicle.setStatus(VehicleStatus.WAITING_AT_RED_LIGHT);
-                    LOGGER.info("Vehicle is waiting at red light: " + vehicle);
+                    LOGGER.info("Vehicle is waiting at red light: {}", vehicle);
                 });
 
         for (var vehicle : vehiclesWaitingOnGreenLight) {
             boolean isClearToGo = true;
             vehicle.setStatus(VehicleStatus.WAITING_FOR_CLEARANCE);
-            LOGGER.info("Vehicle is waiting for clearance: " + vehicle);
+            LOGGER.info("Vehicle is waiting for clearance: {}", vehicle);
             for (var otherVehicle : vehiclesWaitingOnGreenLight) {
                 if (vehicle.equals(otherVehicle)) continue;
                 if (!vehicle.getRoute().hasRoutePriority(otherVehicle.getRoute())) {
                     isClearToGo = false;
 
                     vehicle.setStatus(VehicleStatus.BLOCKED);
-                    LOGGER.info("Vehicle is blocked: " + vehicle);
+                    LOGGER.info("Vehicle is blocked: {}", vehicle);
                     break;
                 }
             }
             if (isClearToGo) {
                 vehicle.setStatus(VehicleStatus.IN_INTERSECTION);
-                LOGGER.info("Vehicle is in intersection: " + vehicle);
+                LOGGER.info("Vehicle is in intersection: {}", vehicle);
                 leavingVehicles.add(vehicle);
             }
 

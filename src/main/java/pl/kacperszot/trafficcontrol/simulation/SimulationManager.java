@@ -46,7 +46,7 @@ public class SimulationManager {
             if (vehicle != null) {
                 vehicle.setStatus(VehicleStatus.APPROACHING);
                 trafficState.addWaitingVehicle(vehicle);
-                LOGGER.info("Vehicle approaching: " + vehicle);
+                LOGGER.info("Vehicle approaching: {}", vehicle);
             }
         });
 

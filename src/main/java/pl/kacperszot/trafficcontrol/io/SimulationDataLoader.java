@@ -15,7 +15,7 @@ public class SimulationDataLoader {
     public CommandsWrapper loadCommandsFromFile(String filePath) {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            LOGGER.info("Loading commands from file " + filePath);
+            LOGGER.info("Loading commands from file {}", filePath);
             return mapper.readValue(new File(filePath), CommandsWrapper.class);
         } catch (Exception e) {
             System.out.println("Error: Error while loading commands from file " + filePath + ": " + e.getMessage());

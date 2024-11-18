@@ -17,7 +17,7 @@ public class SimulationDataSaver {
     public void saveSimulationStepsToFile(List<SimulationStep> stepStatuses, String filePath) {
         SimulationStepWrapper wrapper = new SimulationStepWrapper(stepStatuses);
         ObjectMapper mapper = new ObjectMapper();
-        LOGGER.info("Writing simulation steps to " + filePath);
+        LOGGER.info("Writing simulation steps to {}", filePath);
         try {
             mapper.writeValue(new File(filePath), wrapper);
         } catch (Exception e) {

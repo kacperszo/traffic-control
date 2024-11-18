@@ -50,7 +50,7 @@ public class CrossroadIntersection implements Intersection {
     public void removeVehicle(Vehicle vehicle) {
         getRoadByDirection(vehicle.getRoute().getStart()).getEntryLine().removeNextVehicle();
         vehicle.setStatus(VehicleStatus.COMPLETED_CROSSING);
-        LOGGER.info("Vehicle is completed: " + vehicle);
+        LOGGER.info("Vehicle is completed: {}", vehicle);
     }
 
 
