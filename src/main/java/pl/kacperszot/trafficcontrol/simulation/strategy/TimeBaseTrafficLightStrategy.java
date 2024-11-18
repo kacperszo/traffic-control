@@ -1,5 +1,7 @@
 package pl.kacperszot.trafficcontrol.simulation.strategy;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pl.kacperszot.trafficcontrol.model.intersection.Intersection;
 import pl.kacperszot.trafficcontrol.model.road.Road;
 import pl.kacperszot.trafficcontrol.model.trafficlight.TrafficLight;
@@ -13,6 +15,9 @@ public class TimeBaseTrafficLightStrategy implements TrafficLightStrategy {
     private int ticksInCurrentState = 0;
     private boolean inTransitionState = false;
 
+    private static final Logger LOGGER = LogManager.getLogger();
+
+
     public TimeBaseTrafficLightStrategy(int ticksPerStableState, int ticksPerTransitionState) {
         this.ticksPerStableState = ticksPerStableState;
         this.ticksPerTransitionState = ticksPerTransitionState;
@@ -24,11 +29,13 @@ public class TimeBaseTrafficLightStrategy implements TrafficLightStrategy {
 
         if (inTransitionState) {
             trafficLights.forEach(TrafficLight::toggleNextState);
+            LOGGER.info("Changing TrafficLights");
             inTransitionState = false;
             ticksInCurrentState = 0;
         } else {
             if (ticksInCurrentState >= ticksPerStableState) {
                 trafficLights.forEach(TrafficLight::toggleNextState);
+                LOGGER.info("Changing TrafficLights");
                 inTransitionState = true;
                 ticksInCurrentState = 0;
             } else {

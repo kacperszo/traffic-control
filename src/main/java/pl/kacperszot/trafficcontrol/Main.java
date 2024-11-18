@@ -1,7 +1,5 @@
 package pl.kacperszot.trafficcontrol;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import pl.kacperszot.trafficcontrol.console.ProgramArgumentsParser;
 import pl.kacperszot.trafficcontrol.io.SimulationDataLoader;
 import pl.kacperszot.trafficcontrol.io.SimulationDataSaver;
@@ -13,12 +11,12 @@ import pl.kacperszot.trafficcontrol.model.intersection.CrossroadIntersection;
 import pl.kacperszot.trafficcontrol.simulation.SimulationManager;
 import pl.kacperszot.trafficcontrol.simulation.SimulationStep;
 import pl.kacperszot.trafficcontrol.simulation.VehicleManager;
-import pl.kacperszot.trafficcontrol.simulation.strategy.EveryTickStateTurnTrafficLightStrategy;
 import pl.kacperszot.trafficcontrol.simulation.strategy.TimeBaseTrafficLightStrategy;
 
 import java.util.ArrayList;
 
 public class Main {
+
     public static void main(String[] args) {
         ProgramArgumentsParser parser = new ProgramArgumentsParser();
         ProgramArgumentsParser.FilePaths filePaths = parser.parse(args);
@@ -27,7 +25,9 @@ public class Main {
         CommandsWrapper wrapper = simulationDataLoader.loadCommandsFromFile(filePaths.inputFile());
         VehicleManager vehicleManager = new VehicleManager();
         SimulationManager simulationManager = new SimulationManager(new CrossroadIntersection(), new TimeBaseTrafficLightStrategy(4, 1), vehicleManager);
+
         var steps = new ArrayList<SimulationStep>();
+
         for (Command command : wrapper.commands()) {
             if (command instanceof StepCommand stepCommand) {
                 var step = simulationManager.step();

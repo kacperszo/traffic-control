@@ -1,6 +1,9 @@
 package pl.kacperszot.trafficcontrol.model.intersection;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pl.kacperszot.trafficcontrol.model.Vehicle;
+import pl.kacperszot.trafficcontrol.model.VehicleStatus;
 import pl.kacperszot.trafficcontrol.model.road.Road;
 import pl.kacperszot.trafficcontrol.model.road.RoadDirection;
 import pl.kacperszot.trafficcontrol.model.road.SingleLaneTwoWayRoad;
@@ -14,6 +17,8 @@ public class CrossroadIntersection implements Intersection {
     private final SingleLaneTwoWayRoad southRoad;
     private final SingleLaneTwoWayRoad westRoad;
     private final SingleLaneTwoWayRoad eastRoad;
+    private static final Logger LOGGER = LogManager.getLogger();
+
 
     public CrossroadIntersection() {
         this.northRoad = new SingleLaneTwoWayRoad(RoadDirection.NORTH, TrafficLight.createGreen());
@@ -48,6 +53,8 @@ public class CrossroadIntersection implements Intersection {
     @Override
     public void removeVehicle(Vehicle vehicle) {
         getRoadByDirection(vehicle.getRoute().getStart()).getEntryLine().removeNextVehicle();
+        vehicle.setStatus(VehicleStatus.COMPLETED_CROSSING);
+        LOGGER.info("Vehicle is completed: " + vehicle);
     }
 
 

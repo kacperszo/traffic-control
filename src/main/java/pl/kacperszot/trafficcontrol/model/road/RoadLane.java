@@ -59,7 +59,12 @@ public class RoadLane {
     public void removeNextVehicle() {
         this.vehicles.remove();
     }
+
     public void removeVehicle(Vehicle vehicle) {
         this.vehicles.remove(vehicle);
+    }
+
+    public int size() {
+        return vehicles.size();
     }
 }

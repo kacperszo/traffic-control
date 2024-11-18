@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SimulationStep {
 
-    private List<Vehicle> leftVehicles;
+    private final List<Vehicle> leftVehicles;
 
     public SimulationStep(List<Vehicle> leftVehicles) {
         this.leftVehicles = leftVehicles;
