@@ -43,12 +43,24 @@ public class Route {
 
     private boolean isCollidingWith(Route other) {
         if (other.end == end) return true;
-        if (isGoingForward() && other.isGoingForward() && start.opposite() != start) return true;
+        if (isGoingForward() && other.isGoingForward() && isPerpendicularly(this.start, other.start)) return true;
+        if (isGoingForward() && other.isGoingForward() && !isPerpendicularly(this.start, other.start)) return false;
         if (isTurningLeft() && other.isGoingForward()) return true;
         if (isGoingForward() && other.isGoingForward()) return true;
         if (other.isTurningLeft() && isGoingForward()) return true;
 
         return false;
+    }
+
+    private boolean isPerpendicularly(RoadDirection a, RoadDirection b) {
+        return (a == RoadDirection.EAST && b == RoadDirection.NORTH) ||
+                (a == RoadDirection.EAST && b == RoadDirection.SOUTH) ||
+                (a == RoadDirection.WEST && b == RoadDirection.NORTH) ||
+                (a == RoadDirection.WEST && b == RoadDirection.SOUTH) ||
+                (a == RoadDirection.NORTH && b == RoadDirection.EAST) ||
+                (a == RoadDirection.NORTH && b == RoadDirection.WEST) ||
+                (a == RoadDirection.SOUTH && b == RoadDirection.EAST) ||
+                (a == RoadDirection.SOUTH && b == RoadDirection.WEST);
     }
 
 

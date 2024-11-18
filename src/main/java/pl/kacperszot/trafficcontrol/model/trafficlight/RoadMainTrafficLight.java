@@ -14,11 +14,11 @@ public class RoadMainTrafficLight implements TrafficLight {
         this.state = state;
     }
 
-    public static TrafficLight createGreen() {
+    public static RoadMainTrafficLight createGreen() {
         return new RoadMainTrafficLight(TrafficLightSignal.GREEN);
     }
 
-    public static TrafficLight createRed() {
+    public static RoadMainTrafficLight createRed() {
         return new RoadMainTrafficLight(TrafficLightSignal.RED);
     }
 

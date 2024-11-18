@@ -11,9 +11,9 @@ import java.util.List;
 public class TimeBaseTrafficLightStrategy implements TrafficLightStrategy {
     private final int ticksPerStableState;
     private final int ticksPerTransitionState;
-
-    private int ticksInCurrentState = 0;
     private boolean inTransitionState = false;
+
+    private int step = 0;
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -27,25 +27,20 @@ public class TimeBaseTrafficLightStrategy implements TrafficLightStrategy {
     public void step(Intersection intersection) {
         List<TrafficLight> trafficLights = getAllTrafficLightsFromIntersection(intersection);
 
-        if (inTransitionState) {
+        if (step == ticksPerStableState && !inTransitionState) {
+            trafficLights.forEach(TrafficLight::toggleNextState);
+            LOGGER.info("Changing TrafficLights");
+            inTransitionState = true;
+            step = 0;
+        } else if (step == ticksPerTransitionState && inTransitionState) {
             trafficLights.forEach(TrafficLight::toggleNextState);
             LOGGER.info("Changing TrafficLights");
             inTransitionState = false;
-            ticksInCurrentState = 0;
+            step = 0;
         } else {
-            if (ticksInCurrentState >= ticksPerStableState) {
-                trafficLights.forEach(TrafficLight::toggleNextState);
-                LOGGER.info("Changing TrafficLights");
-                inTransitionState = true;
-                ticksInCurrentState = 0;
-            } else {
-                ticksInCurrentState++;
-            }
+            step += 1;
         }
 
-        if (ticksInCurrentState >= ticksPerTransitionState) {
-            inTransitionState = true;
-        }
     }
 
     private List<TrafficLight> getAllTrafficLightsFromIntersection(Intersection intersection) {
