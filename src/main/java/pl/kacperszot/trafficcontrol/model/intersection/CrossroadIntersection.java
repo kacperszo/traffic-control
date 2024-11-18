@@ -7,6 +7,7 @@ import pl.kacperszot.trafficcontrol.model.VehicleStatus;
 import pl.kacperszot.trafficcontrol.model.road.Road;
 import pl.kacperszot.trafficcontrol.model.road.RoadDirection;
 import pl.kacperszot.trafficcontrol.model.road.SingleLaneTwoWayRoad;
+import pl.kacperszot.trafficcontrol.model.trafficlight.RoadMainTrafficLight;
 import pl.kacperszot.trafficcontrol.model.trafficlight.TrafficLight;
 
 import java.util.List;
@@ -20,10 +21,10 @@ public class CrossroadIntersection implements Intersection {
 
 
     public CrossroadIntersection() {
-        this.northRoad = new SingleLaneTwoWayRoad(RoadDirection.NORTH, TrafficLight.createGreen());
-        this.southRoad = new SingleLaneTwoWayRoad(RoadDirection.SOUTH, TrafficLight.createGreen());
-        this.westRoad = new SingleLaneTwoWayRoad(RoadDirection.WEST, TrafficLight.createRed());
-        this.eastRoad = new SingleLaneTwoWayRoad(RoadDirection.EAST, TrafficLight.createRed());
+        this.northRoad = new SingleLaneTwoWayRoad(RoadDirection.NORTH, RoadMainTrafficLight.createGreen());
+        this.southRoad = new SingleLaneTwoWayRoad(RoadDirection.SOUTH, RoadMainTrafficLight.createGreen());
+        this.westRoad = new SingleLaneTwoWayRoad(RoadDirection.WEST, RoadMainTrafficLight.createRed());
+        this.eastRoad = new SingleLaneTwoWayRoad(RoadDirection.EAST, RoadMainTrafficLight.createRed());
     }
 
     @Override

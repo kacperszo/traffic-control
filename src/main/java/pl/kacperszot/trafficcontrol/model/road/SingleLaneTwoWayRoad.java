@@ -1,5 +1,6 @@
 package pl.kacperszot.trafficcontrol.model.road;
 
+import pl.kacperszot.trafficcontrol.model.trafficlight.RoadMainTrafficLight;
 import pl.kacperszot.trafficcontrol.model.trafficlight.TrafficLight;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public class SingleLaneTwoWayRoad implements Road {
     }
 
     public SingleLaneTwoWayRoad(RoadDirection direction) {
-        this(direction, new TrafficLight());
+        this(direction, new RoadMainTrafficLight());
     }
 
     public RoadLane getEntryLine() {
