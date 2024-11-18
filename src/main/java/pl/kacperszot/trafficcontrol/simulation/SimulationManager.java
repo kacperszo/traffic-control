@@ -1,13 +1,12 @@
 package pl.kacperszot.trafficcontrol.simulation;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pl.kacperszot.trafficcontrol.model.TrafficState;
 import pl.kacperszot.trafficcontrol.model.Vehicle;
 import pl.kacperszot.trafficcontrol.model.VehicleStatus;
 import pl.kacperszot.trafficcontrol.model.intersection.Intersection;
 import pl.kacperszot.trafficcontrol.simulation.strategy.TrafficLightStrategy;
-
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 public class SimulationManager {
     private final Intersection intersection;
@@ -22,7 +21,7 @@ public class SimulationManager {
         LOGGER.info("Starting Simulation");
 
         //setup traffic lights
-        //TODO
+        trafficLightStrategy.setup(intersection);
     }
 
 

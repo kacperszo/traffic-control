@@ -43,4 +43,9 @@ public class RoadMainTrafficLight implements TrafficLight {
         return this.state;
     }
 
+    @Override
+    public void setState(TrafficLightSignal trafficLightSignal) {
+        this.state = trafficLightSignal;
+    }
+
 }

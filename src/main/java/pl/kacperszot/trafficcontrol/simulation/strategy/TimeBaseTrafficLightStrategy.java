@@ -4,7 +4,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import pl.kacperszot.trafficcontrol.model.intersection.Intersection;
 import pl.kacperszot.trafficcontrol.model.road.Road;
+import pl.kacperszot.trafficcontrol.model.road.RoadDirection;
 import pl.kacperszot.trafficcontrol.model.trafficlight.TrafficLight;
+import pl.kacperszot.trafficcontrol.model.trafficlight.TrafficLightSignal;
 
 import java.util.List;
 
@@ -21,6 +23,19 @@ public class TimeBaseTrafficLightStrategy implements TrafficLightStrategy {
     public TimeBaseTrafficLightStrategy(int ticksPerStableState, int ticksPerTransitionState) {
         this.ticksPerStableState = ticksPerStableState;
         this.ticksPerTransitionState = ticksPerTransitionState;
+    }
+
+    @Override
+    public void setup(Intersection intersection) {
+        //make NORTH-SOUTH GREEN
+        //and EAST-WEST RED
+        for (Road road : intersection.getRoads()) {
+            if (road.getDirection() == RoadDirection.NORTH || road.getDirection() == RoadDirection.SOUTH) {
+                road.getTrafficLight().setState(TrafficLightSignal.GREEN);
+            } else {
+                road.getTrafficLight().setState(TrafficLightSignal.RED);
+            }
+        }
     }
 
     @Override
