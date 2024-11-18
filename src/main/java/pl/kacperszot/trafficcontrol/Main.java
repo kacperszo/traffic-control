@@ -11,7 +11,9 @@ import pl.kacperszot.trafficcontrol.model.intersection.CrossroadIntersection;
 import pl.kacperszot.trafficcontrol.simulation.SimulationManager;
 import pl.kacperszot.trafficcontrol.simulation.SimulationStep;
 import pl.kacperszot.trafficcontrol.simulation.VehicleManager;
+import pl.kacperszot.trafficcontrol.simulation.strategy.AdaptiveProportionalTrafficLightStrategy;
 import pl.kacperszot.trafficcontrol.simulation.strategy.TimeBaseTrafficLightStrategy;
+import pl.kacperszot.trafficcontrol.simulation.strategy.TrafficLightStrategy;
 
 import java.util.ArrayList;
 
@@ -24,7 +26,15 @@ public class Main {
         SimulationDataSaver simulationDataSaver = new SimulationDataSaver();
         CommandsWrapper wrapper = simulationDataLoader.loadCommandsFromFile(filePaths.inputFile());
         VehicleManager vehicleManager = new VehicleManager();
-        SimulationManager simulationManager = new SimulationManager(new CrossroadIntersection(), new TimeBaseTrafficLightStrategy(4, 1), vehicleManager);
+
+        TrafficLightStrategy strategy = new AdaptiveProportionalTrafficLightStrategy(
+                1,
+                10,
+                1,
+                1.0
+        );
+
+        SimulationManager simulationManager = new SimulationManager(new CrossroadIntersection(), strategy, vehicleManager);
 
         var steps = new ArrayList<SimulationStep>();
 
