@@ -31,4 +31,9 @@ public interface Road {
      * @return direction
      */
     RoadDirection getDirection();
+
+    /**
+     * Waiting count of vehicle in the entry lane
+     */
+    int getWaitingVehicleCount();
 }
