@@ -16,11 +16,11 @@ public class TrafficState {
     }
 
     public Map<RoadDirection, List<Vehicle>> getWaitingVehicles() {
-        return waitingVehicles;
+        return Collections.unmodifiableMap(waitingVehicles);
     }
 
     public Map<RoadDirection, TrafficLightSignal> getLightStates() {
-        return lightStates;
+        return Collections.unmodifiableMap(lightStates);
     }
 
     public void addWaitingVehicle(Vehicle vehicle) {
