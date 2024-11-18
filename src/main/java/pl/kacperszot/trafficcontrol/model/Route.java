@@ -21,38 +21,73 @@ public class Route {
         return end;
     }
 
+    /**
+     * Drivers are following right hand rule and are always do the best to not collide even if it results in deadlock
+     * @param other vehicle I want to check if i can go in the same tick
+     * @return if I can go in this tick considering there is vehicle other on intersection
+     */
     public boolean hasRoutePriority(Route other) {
-        // Forward movements always have priority
-        if (this.isGoingForward()) {
+        // if routes do not cross, both are privileged
+        if (!this.isCollidingWith(other)) {
             return true;
         }
 
-        // Left turns have priority over other left turns or anything other than forward
-        if (this.isTurningLeft()) {
-            return other.isTurningLeft() || !other.isGoingForward();
+        // turning edge case
+        if (this.isTurningRight() && !other.isGoingForward()) {
+            return true;
         }
 
-        // Default case: no priority
+        //right hand rule
+        return isRightOf(other.start);
+    }
+
+    private boolean isCollidingWith(Route other) {
+        if (other.end == end) return true;
+        if (isGoingForward() && other.isGoingForward() && start.opposite() != start) return true;
+        if (isTurningLeft() && other.isGoingForward()) return true;
+        if (isGoingForward() && other.isGoingForward()) return true;
+        if (other.isTurningLeft() && isGoingForward()) return true;
+
         return false;
     }
 
 
-    public boolean isTurningRight() {
-        return  (start == RoadDirection.NORTH && end == RoadDirection.EAST) ||
-                (start == RoadDirection.WEST && end == RoadDirection.NORTH) ||
-                (start == RoadDirection.SOUTH && end == RoadDirection.WEST) ||
-                (start == RoadDirection.EAST && end == RoadDirection.SOUTH);
+    private boolean isRightOf(RoadDirection otherDirection) {
+        return switch (otherDirection) {
+            case NORTH -> this.start == RoadDirection.WEST;
+            case EAST -> this.start == RoadDirection.NORTH;
+            case SOUTH -> this.start == RoadDirection.EAST;
+            case WEST -> this.start == RoadDirection.SOUTH;
+        };
     }
 
-    public boolean isTurningLeft() {
-        return  (start == RoadDirection.NORTH && end == RoadDirection.WEST) ||
+
+    private boolean isRightOfDirection(RoadDirection thisDirection, RoadDirection otherDirection) {
+        return switch (otherDirection) {
+            case NORTH -> thisDirection == RoadDirection.WEST;
+            case EAST -> thisDirection == RoadDirection.NORTH;
+            case SOUTH -> thisDirection == RoadDirection.EAST;
+            case WEST -> thisDirection == RoadDirection.SOUTH;
+        };
+    }
+
+
+    public boolean isTurningRight() {
+        return (start == RoadDirection.NORTH && end == RoadDirection.WEST) ||
                 (start == RoadDirection.WEST && end == RoadDirection.SOUTH) ||
                 (start == RoadDirection.SOUTH && end == RoadDirection.EAST) ||
                 (start == RoadDirection.EAST && end == RoadDirection.NORTH);
     }
 
+    public boolean isTurningLeft() {
+        return (start == RoadDirection.NORTH && end == RoadDirection.EAST) ||
+                (start == RoadDirection.WEST && end == RoadDirection.NORTH) ||
+                (start == RoadDirection.SOUTH && end == RoadDirection.WEST) ||
+                (start == RoadDirection.EAST && end == RoadDirection.SOUTH);
+    }
+
     public boolean isGoingForward() {
-        return  (start == RoadDirection.NORTH && end == RoadDirection.SOUTH) ||
+        return (start == RoadDirection.NORTH && end == RoadDirection.SOUTH) ||
                 (start == RoadDirection.WEST && end == RoadDirection.EAST) ||
                 (start == RoadDirection.SOUTH && end == RoadDirection.NORTH) ||
                 (start == RoadDirection.EAST && end == RoadDirection.WEST);

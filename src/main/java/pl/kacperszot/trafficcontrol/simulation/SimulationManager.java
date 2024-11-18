@@ -20,6 +20,9 @@ public class SimulationManager {
         this.trafficLightStrategy = trafficLightStrategy;
         this.vehicleManager = vehicleManager;
         LOGGER.info("Starting Simulation");
+
+        //setup traffic lights
+        //TODO
     }
 
 

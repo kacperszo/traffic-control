@@ -17,6 +17,7 @@ public enum RoadDirection {
     RoadDirection(String direction) {
         this.direction = direction;
     }
+
     @JsonValue
     public String getJsonValue() {
         return direction;
@@ -32,4 +33,12 @@ public enum RoadDirection {
         throw new IllegalArgumentException("Unknown value: " + value);
     }
 
+    public RoadDirection opposite() {
+        return switch (this) {
+            case NORTH -> SOUTH;
+            case EAST -> WEST;
+            case SOUTH -> NORTH;
+            case WEST -> EAST;
+        };
+    }
 }

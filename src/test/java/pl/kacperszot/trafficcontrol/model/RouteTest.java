@@ -25,43 +25,58 @@ class RouteTest {
     }
 
     @Test
-    void testIsTurningLeft() {
-        assertTrue(new Route(RoadDirection.NORTH, RoadDirection.WEST).isTurningLeft());
-        assertTrue(new Route(RoadDirection.WEST, RoadDirection.SOUTH).isTurningLeft());
-        assertTrue(new Route(RoadDirection.SOUTH, RoadDirection.EAST).isTurningLeft());
-        assertTrue(new Route(RoadDirection.EAST, RoadDirection.NORTH).isTurningLeft());
+    void testIsTurningRight() {
+        // Right turns: (start -> end)
+        assertTrue(new Route(RoadDirection.NORTH, RoadDirection.WEST).isTurningRight());
+        assertTrue(new Route(RoadDirection.WEST, RoadDirection.SOUTH).isTurningRight());
+        assertTrue(new Route(RoadDirection.SOUTH, RoadDirection.EAST).isTurningRight());
+        assertTrue(new Route(RoadDirection.EAST, RoadDirection.NORTH).isTurningRight());
 
-        assertFalse(new Route(RoadDirection.NORTH, RoadDirection.EAST).isTurningLeft());
+        // Non-right turns (i.e., not turning right):
+        assertFalse(new Route(RoadDirection.NORTH, RoadDirection.EAST).isTurningRight());
+        assertFalse(new Route(RoadDirection.WEST, RoadDirection.NORTH).isTurningRight());
+        assertFalse(new Route(RoadDirection.SOUTH, RoadDirection.WEST).isTurningRight());
+        assertFalse(new Route(RoadDirection.EAST, RoadDirection.SOUTH).isTurningRight());
     }
 
     @Test
-    void testIsTurningRight() {
-        assertTrue(new Route(RoadDirection.NORTH, RoadDirection.EAST).isTurningRight());
-        assertTrue(new Route(RoadDirection.WEST, RoadDirection.NORTH).isTurningRight());
-        assertTrue(new Route(RoadDirection.SOUTH, RoadDirection.WEST).isTurningRight());
-        assertTrue(new Route(RoadDirection.EAST, RoadDirection.SOUTH).isTurningRight());
+    void testIsTurningLeft() {
+        // Left turns: (start -> end)
+        assertTrue(new Route(RoadDirection.NORTH, RoadDirection.EAST).isTurningLeft());
+        assertTrue(new Route(RoadDirection.WEST, RoadDirection.NORTH).isTurningLeft());
+        assertTrue(new Route(RoadDirection.SOUTH, RoadDirection.WEST).isTurningLeft());
+        assertTrue(new Route(RoadDirection.EAST, RoadDirection.SOUTH).isTurningLeft());
 
-        assertFalse(new Route(RoadDirection.NORTH, RoadDirection.WEST).isTurningRight());
+        // Non-left turns (i.e., not turning left):
+        assertFalse(new Route(RoadDirection.NORTH, RoadDirection.WEST).isTurningLeft());
+        assertFalse(new Route(RoadDirection.WEST, RoadDirection.SOUTH).isTurningLeft());
+        assertFalse(new Route(RoadDirection.SOUTH, RoadDirection.EAST).isTurningLeft());
+        assertFalse(new Route(RoadDirection.EAST, RoadDirection.NORTH).isTurningLeft());
     }
 
     @Test
     void testHasRoutePriority() {
-        Route forwardRoute = new Route(RoadDirection.NORTH, RoadDirection.SOUTH);
-        Route leftTurn = new Route(RoadDirection.NORTH, RoadDirection.WEST);
-        Route rightTurn = new Route(RoadDirection.NORTH, RoadDirection.EAST);
+       Route r1 = new Route(RoadDirection.NORTH, RoadDirection.WEST);
+       Route r2 = new Route(RoadDirection.SOUTH, RoadDirection.WEST);
+       Route r3 = new Route(RoadDirection.WEST, RoadDirection.EAST);
+       Route r4 = new Route(RoadDirection.SOUTH, RoadDirection.NORTH);
+       Route r5 = new Route(RoadDirection.EAST, RoadDirection.WEST);
 
-        // Forward movement always has priority
-        assertTrue(forwardRoute.hasRoutePriority(leftTurn));
-        assertTrue(forwardRoute.hasRoutePriority(rightTurn));
+       assertTrue(r1.hasRoutePriority(r2));
+       assertFalse(r2.hasRoutePriority(r1));
 
-        // Left turns have priority over non-forward movements
-        assertTrue(leftTurn.hasRoutePriority(rightTurn));
+       assertTrue(r1.hasRoutePriority(r3));
+       assertTrue(r3.hasRoutePriority(r1));
 
-        // Left turns have priority over other left turns
-        assertTrue(leftTurn.hasRoutePriority(new Route(RoadDirection.WEST, RoadDirection.NORTH)));
+       assertTrue(r2.hasRoutePriority(r3));
+       assertFalse(r3.hasRoutePriority(r2));
 
-        // Non-forward movements without left turn have no priority
-        assertFalse(rightTurn.hasRoutePriority(leftTurn));
+       assertTrue(r4.hasRoutePriority(r3));
+       assertFalse(r3.hasRoutePriority(r4));
+
+       assertTrue(r5.hasRoutePriority(r2));
+       assertFalse(r2.hasRoutePriority(r5));
+
     }
 
     @Test
@@ -72,6 +87,6 @@ class RouteTest {
 
         assertEquals(route1, route2);
         assertNotEquals(route1, differentRoute);
-        assertNotEquals(route1, null);
+        assertNotEquals(null, route1);
     }
 }
