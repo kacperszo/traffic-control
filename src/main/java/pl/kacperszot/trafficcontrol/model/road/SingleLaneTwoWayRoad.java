@@ -1,6 +1,5 @@
 package pl.kacperszot.trafficcontrol.model.road;
 
-import pl.kacperszot.trafficcontrol.model.Vehicle;
 import pl.kacperszot.trafficcontrol.model.trafficlight.TrafficLight;
 
 import java.util.List;

@@ -10,7 +10,6 @@ import pl.kacperszot.trafficcontrol.model.road.SingleLaneTwoWayRoad;
 import pl.kacperszot.trafficcontrol.model.trafficlight.TrafficLight;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CrossroadIntersection implements Intersection {
     private final SingleLaneTwoWayRoad northRoad;

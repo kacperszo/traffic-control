@@ -6,7 +6,6 @@ import org.apache.logging.log4j.Logger;
 import pl.kacperszot.trafficcontrol.model.command.CommandsWrapper;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 public class SimulationDataLoader {
