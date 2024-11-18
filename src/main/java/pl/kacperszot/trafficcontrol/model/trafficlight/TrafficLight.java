@@ -6,13 +6,22 @@ package pl.kacperszot.trafficcontrol.model.trafficlight;
 public interface TrafficLight {
     /**
      * get state
+     *
      * @return current traffic light state
      */
     TrafficLightSignal getState();
 
     /**
      * Toggle next state and return new state
+     *
      * @return new traffic light state
      */
     TrafficLightSignal toggleNextState();
+
+    /**
+     * Set Light state
+     *
+     * @param trafficLightSignal new state
+     */
+    void setState(TrafficLightSignal trafficLightSignal);
 }
