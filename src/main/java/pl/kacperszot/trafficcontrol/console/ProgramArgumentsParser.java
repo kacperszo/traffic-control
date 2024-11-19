@@ -20,7 +20,7 @@ public class ProgramArgumentsParser {
         LOGGER.info("Parsing program arguments");
         if (args.length != 2) {
             System.out.println("Error: Missing input or output file.");
-            System.out.println("Usage: traffic-control <input-file> <output-file>);");
+            System.out.println("Usage: traffic-control <input-file> <output-file>");
             System.exit(1);
         }
 

@@ -22,7 +22,7 @@ public class SimulationDataSaver {
             mapper.writeValue(new File(filePath), wrapper);
         } catch (Exception e) {
             System.out.println("Error: Error while saving steps to file " + filePath + ": " + e.getMessage());
-            System.out.println("Usage: traffic-control <input-file> <output-file>);");
+            System.out.println("Usage: traffic-control <input-file> <output-file>");
             System.exit(1);
         }
     }

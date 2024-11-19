@@ -18,7 +18,7 @@ public class SimulationDataLoader {
             return mapper.readValue(new File(filePath), CommandsWrapper.class);
         } catch (Exception e) {
             System.out.println("Error: Error while loading commands from file " + filePath + ": " + e.getMessage());
-            System.out.println("Usage: traffic-control <input-file> <output-file>);");
+            System.out.println("Usage: traffic-control <input-file> <output-file>");
             System.exit(1);
         }
         return new CommandsWrapper(List.of());
