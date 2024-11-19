@@ -37,12 +37,13 @@ public class SingleLaneTwoWayRoad implements Road {
     }
 
     @Override
+    public int getWaitingVehicleCount() {
+        return getEntryLanes().stream().mapToInt(RoadLane::size).sum();
+    }
+
+    @Override
     public String toString() {
-        return "Road{" +
-                "direction=" + direction +
-                ", entryLine=" + entryLine +
-                ", exitLine=" + exitLine +
-                '}';
+        return "Road{" + "direction=" + direction + ", entryLine=" + entryLine + ", exitLine=" + exitLine + '}';
     }
 
 

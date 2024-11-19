@@ -53,6 +53,9 @@
     },
     {
       "type": "step"
+    },
+    {
+      "type": "step"
     }
   ]
 }

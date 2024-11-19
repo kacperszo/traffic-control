@@ -14,7 +14,7 @@ public class TimeBaseTrafficLightStrategyTest {
 
     @Test
     void testStableState() {
-        // Setup the strategy with a 3 ticks per stable state, 1 tick per transition
+        // Setup the strategy with a 4 ticks per stable state, 1 tick per transition
         TimeBaseTrafficLightStrategy strategy = new TimeBaseTrafficLightStrategy(4, 1);
 
         // Mock traffic lights
@@ -42,7 +42,7 @@ public class TimeBaseTrafficLightStrategyTest {
 
     @Test
     void testTransitionStateAfterStable() {
-        // Setup the strategy with 3 ticks per stable state, 1 tick per transition
+        // Setup the strategy with 2 ticks per stable state, 1 tick per transition
         TimeBaseTrafficLightStrategy strategy = new TimeBaseTrafficLightStrategy(2, 1);
 
         // Mock traffic lights
@@ -71,7 +71,7 @@ public class TimeBaseTrafficLightStrategyTest {
 
     @Test
     void testMultipleStepsWithTransition() {
-        // Setup the strategy with 3 ticks per stable state, 1 tick per transition
+        // Setup the strategy with 2 ticks per stable state, 1 tick per transition
         TimeBaseTrafficLightStrategy strategy = new TimeBaseTrafficLightStrategy(2, 1);
 
         // Mock traffic lights
@@ -91,17 +91,21 @@ public class TimeBaseTrafficLightStrategyTest {
         // Step through multiple ticks and transitions
         strategy.step(mockIntersection); // tick 1
         strategy.step(mockIntersection); // tick 2
-        strategy.step(mockIntersection); // tick 3 = transition red to yellow_red
+        strategy.step(mockIntersection); // tick 3 = transition red to yellow_red #1
 
         verify(mockTrafficLight1, times(1)).toggleNextState();
         verify(mockTrafficLight2, times(1)).toggleNextState();
 
-        // After transition, step again
-        strategy.step(mockIntersection); // tick 4 transition yellow_red to green
+        // After transition, steps again
+        strategy.step(mockIntersection); // tick 4 transition yellow_red to green #2
         strategy.step(mockIntersection); // tick 5 green
         strategy.step(mockIntersection); // tick 6 green
-        verify(mockTrafficLight1, times(2)).toggleNextState();
-        verify(mockTrafficLight2, times(2)).toggleNextState();
+        strategy.step(mockIntersection); // tick 7 green to yellow #3
+        strategy.step(mockIntersection); // tick 8 yellow to red #4
+        strategy.step(mockIntersection); // tick 9 red
+        strategy.step(mockIntersection); // tick 10 red
+        verify(mockTrafficLight1, times(4)).toggleNextState();
+        verify(mockTrafficLight2, times(4)).toggleNextState();
 
     }
 }
